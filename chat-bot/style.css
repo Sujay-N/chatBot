@@ -1,0 +1,9 @@
+.scrollable{
+   height : 500px;
+   overflow: scroll;
+  }
+
+  .bot{
+      width : 150px;
+      height:auto
+  }
