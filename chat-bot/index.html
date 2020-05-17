@@ -21,22 +21,26 @@
 
   <link rel="stylesheet" type="text/css" href="style.css">
 
+  <script src="https://kit.fontawesome.com/b8d475717b.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
   <div class="container-fluid">
 
-    <div class="row m-5 overflow">
+    <div class="row m-3 overflow">
       <div class="col-8">
-        <img src="https://cdn.svgporn.com/logos/geekbot.svg" id="botImg" class="offset-9 bot">
+      
 
       </div>
 
-      <div class="col-4  shadow border rounded myChatBox">
+      <div class="col-4  ">
+        <img src="https://cdn.svgporn.com/logos/geekbot.svg" id="botImg" class="offset-9 bot">
+        <div class="toggleShowHide">
 
 
-        <div class="scrollable">
+        <div class=" shadow border rounded myChatBox scrollable">
           <div class="text-center border rounded border-info bg-light mt-3">
             <h3> Hi!</h3>
             <h4>Welcome to XYZ</h4>
@@ -44,8 +48,8 @@
           </div>
 
           <br />
-          <button class="btn btn-outline-info m-2 ml-5" onclick="y1()"> Yes</button>
-          <button class="btn btn-outline-info m-2" onclick="m1()"> Maybe </button>
+          <button class="btn btn-outline-info m-2 ml-5" onclick="yes1()"> Yes</button>
+          <button class="btn btn-outline-info m-2" onclick="mayBe1()"> Maybe </button>
           <button class="btn btn-outline-info m-2" onclick="who()"> Who is this ?</button>
 
           <div id="step2"> </div>
@@ -66,8 +70,27 @@
           <div id="step7"> </div>
           <div id="step7n"> </div>
 
+          <div id="finalStep"> </div>
+          
+
+          
+          
+
+        </div>
+        <div class="chatInput">
+          <div class="input-group ">
+            <input type="text" class="form-control" aria-label="Text input with button"/>
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-outline-secondary" > send  </i> </button>
+              
+            </div>
+          </div>
+        </div>
+       
         </div>
 
+
+        
       </div>
 
     </div>

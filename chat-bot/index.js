@@ -5,20 +5,36 @@ var stepFive = document.getElementById('step5');
 var stepSix = document.getElementById('step6');
 var stepSeven = document.getElementById('step7');
 
+var finalStep = document.getElementById("finalStep");
+
 var order = [];
 
+var orderObj ={}
+var cart = [];
+
+
+// $(document).ready(function() {
+// 	$('.myChatBox').hide();
+// 	// $(".chatInput").hide();
+// 	$('.bot').on('click', function() {
+// 		$('.myChatBox').toggle();
+// 		// $(".chatInput").toggle();
+// 	});
+// });
 $(document).ready(function() {
-	$('.myChatBox').hide();
+	$('.toggleShowHide').hide();
+	// $(".chatInput").hide();
 	$('.bot').on('click', function() {
-		$('.myChatBox').toggle();
+		$('.toggleShowHide').toggle();
+		// $(".chatInput").toggle();
 	});
 });
 
-function y1() {
+function yes1() {
 	var msg = document.createElement('h5');
 	msg.innerText = 'Select which kind of Pizza';
 	stepTwo.appendChild(msg);
-	msg.setAttribute('class', 'text-center m-2');
+	msg.setAttribute('class', 'text-center my-2 ');
 
 	var veg = document.createElement('button');
 	veg.innerText = 'Vegetarian';
@@ -34,7 +50,7 @@ function y1() {
 	nonVeg.addEventListener('click', nonVegCrust);
 }
 
-function m1() {}
+function mayBe1() {}
 
 function who() {}
 
@@ -42,6 +58,7 @@ function vegCrust() {
 	console.log('inside veg');
 
 	order.push('Vegetarian');
+	orderObj.kind = "Vegetarian"
 
 	var typeV = document.createElement('h5');
 	typeV.innerText = 'Select Type of Crust';
@@ -74,6 +91,7 @@ function nonVegCrust() {
 	console.log('inside nonveg');
 
 	order.push('Non Veg');
+	orderObj.kind = "Non-Veg"
 
 	var typeN = document.createElement('h5');
 	typeN.innerText = 'Select Type of Crust';
@@ -102,14 +120,17 @@ function nonVegCrust() {
 
 function vegWheat() {
 	order.push('Wheat Crust');
+	orderObj.crust = "Wheat Crust"
 	allVegPizzas();
 }
 function vegThin() {
 	order.push('Thin Crust');
+	orderObj.crust ="Thin Crust"
 	allVegPizzas();
 }
 function vegCB() {
 	order.push('Chese Burst');
+	orderObj.crust = "Cheese Burst"
 	allVegPizzas();
 }
 
@@ -117,7 +138,7 @@ function allVegPizzas() {
 	var selV = document.createElement('h5');
 	selV.innerText = 'Choose From Our In house Speacials';
 	stepFour.appendChild(selV);
-	selV.setAttribute('class', 'text-center my-2');
+	selV.setAttribute('class', 'text-center my-4 ');
 
 	var veg1 = document.createElement('button');
 	veg1.innerText = 'Mexican Green Wave';
@@ -142,34 +163,52 @@ function allVegPizzas() {
 	veg1.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(veg1.innerHTML);
+		orderObj.pizza = veg1.innerHTML
 		console.log(order);
 	});
 
 	veg2.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(veg2.innerHTML);
+		orderObj.pizza = veg2.innerHTML
 		console.log(order);
 	});
 
 	veg3.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(veg3.innerHTML);
+		orderObj.pizza = veg3.innerHTML
 		console.log(order);
 	});
 
 	veg4.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(veg4.innerHTML);
+		orderObj.pizza = veg4.innerHTML
 		console.log(order);
 	});
 
-	extraToppings();
+	var customize = document.createElement("button")
+	customize.innerHTML= "Customize"
+	customize.setAttribute("class","btn btn-info ml-3 my-2")
+	stepFour.appendChild(customize)
+	customize.addEventListener("click",extraToppings)
+
+	var goToCart = document.createElement("button")
+	goToCart.innerHTML= "Customize"
+	goToCart.setAttribute("class","btn btn-info ml-3 my-2")
+	stepFour.appendChild(goToCart)
+	goToCart.addEventListener("click",checkComplete)
+
+
+
+	
 }
 
 function pizzaSelected() {
 	var selAdded = document.createElement('h5');
 	selAdded.innerHTML = 'Yippie! Pizza Added To Cart!';
-	selAdded.setAttribute('class', 'text-success text-center');
+	selAdded.setAttribute('class', 'text-success text-center my-2 ');
 	stepFour.appendChild(selAdded);
 }
 
@@ -212,30 +251,35 @@ function extraToppings() {
 	option1.addEventListener('click', function() {
 		toppingSelected();
 		order.push(option1.innerHTML);
+		orderObj.tops = option1.innerHTML
 		console.log(order);
 	});
 
 	option2.addEventListener('click', function() {
 		toppingSelected();
 		order.push(option2.innerHTML);
+		orderObj.tops = option2.innerHTML
 		console.log(order);
 	});
 
 	option3.addEventListener('click', function() {
 		toppingSelected();
 		order.push(option3.innerHTML);
+		orderObj.tops = option3.innerHTML
 		console.log(order);
 	});
 
 	option4.addEventListener('click', function() {
 		toppingSelected();
 		order.push(option4.innerHTML);
+		orderObj.tops = option4.innerHTML
 		console.log(order);
 	});
 
 	option5.addEventListener('click', function() {
 		toppingSelected();
 		order.push(option5.innerHTML);
+		orderObj.tops = option5.innerHTML
 		console.log(order);
 	});
 
@@ -245,14 +289,14 @@ function extraToppings() {
 function toppingSelected() {
 	var selTopAdded = document.createElement('h5');
 	selTopAdded.innerHTML = '!Toppings Added!';
-	selTopAdded.setAttribute('class', 'text-primary text-center');
+	selTopAdded.setAttribute('class', 'text-primary text-center my-2 ');
 	stepFour.appendChild(selTopAdded);
 }
 
 function checkComplete() {
 	var comp = document.createElement('h5');
 	comp.innerHTML = 'Is Your order complete';
-	comp.setAttribute('class', 'text-center');
+	comp.setAttribute('class', 'text-center my-2 ');
 	stepFive.appendChild(comp);
 
 	var compY = document.createElement('button');
@@ -272,25 +316,83 @@ function checkComplete() {
 
 	compY.addEventListener('click', placeOrder);
 
-	// compN.addEventListener("click",) logic
+	compN.addEventListener("click",addAnotherPizza) 
+
+	viewCurrentOrder.addEventListener("click",viewSummary)
+}
+
+function addAnotherPizza(){
+	stepTwo.innerHTML = "";
+	stepThree.innerHTML = "";
+	stepFour.innerHTML = "";
+	stepFive.innerHTML = "";
+	stepSix.innerHTML = "";
+
+	yes1()
 }
 
 function placeOrder() {
 	var msgToGetDetails = document.createElement('h5');
 	msgToGetDetails.innerHTML = 'Your Cart is Ready! Please fill in your details to Proceed ';
-	stepSix.appendChild(msgToGetDetails);
+    stepSix.appendChild(msgToGetDetails);
+    msgToGetDetails.setAttribute("class","my-2 ")
 }
+
+function viewSummary(){
+
+	cart.push(orderObj)
+	console.log(cart)
+	 
+	var table = document.createElement("table")
+	// var tHead = document.createElement("thead")
+	// table.appendChild(tHead)
+
+	var tRow = document.createElement("tr")
+	table.appendChild(tRow)
+
+
+	// var tbody = document.createElement("tbody")
+	// table.appendChild(tbody)
+	var tCol1 = document.createElement("td")
+	var tCol2 = document.createElement("td")
+	var tCol3 = document.createElement("td")
+
+	if(orderObj.tops != null)
+	var tCol4 = document.createElement("td")
+
+		cart.map((e) => {
+				tCol1.textContent = e.kind
+				tCol2.innerHTML = e.crust
+				tCol3.innerHTML = e.pizza
+				if(orderObj.tops != null)
+				tCol4.innerHTML = e.tops
+
+		})
+		console.log(tCol1,tCol2,tCol3,tCol4)
+		tRow.appendChild(tCol1)
+		tRow.appendChild(tCol2)
+		tRow.appendChild(tCol3)
+		tRow.appendChild(tCol4)
+
+		
+	
+	finalStep.appendChild(table)
+}
+
 
 function nonVegWheat() {
 	order.push('Wheat Crust');
+	orderObj.crust = "Wheat Crust"
 	allNonVegPizzas();
 }
 function nonVegThin() {
 	order.push('Thin Crust');
+	orderObj.crust = "Thin Crust"
 	allNonVegPizzas();
 }
 function nonVegCB() {
 	order.push('Cheese Burst');
+	orderObj.crust = "Cheese Burst"
 	allNonVegPizzas();
 }
 
@@ -323,26 +425,41 @@ function allNonVegPizzas() {
 	nonVeg1.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(nonVeg1.innerHTML);
+		orderObj.pizza = nonVeg1.innerHTML
 		console.log(order);
 	});
 
 	nonVeg2.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(nonVeg2.innerHTML);
+		orderObj.pizza = nonVeg2.innerHTML
 		console.log(order);
 	});
 
 	nonVeg3.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(nonVeg3.innerHTML);
+		orderObj.pizza = nonVeg3.innerHTML
 		console.log(order);
 	});
 
 	nonVeg4.addEventListener('click', function() {
 		pizzaSelected();
 		order.push(nonVeg4.innerHTML);
+		orderObj.pizza = nonVeg4.innerHTML
 		console.log(order);
 	});
 
-	extraToppings();
+	var customizeNon = document.createElement("button")
+	customizeNon.innerHTML= "Customize"
+	customizeNon.setAttribute("class","btn btn-info ml-3 my-2")
+	stepFour.appendChild(customizeNon)
+	customizeNon.addEventListener("click",extraToppings)
+
+	var goToCartNon = document.createElement("button")
+	goToCartNon.innerHTML= "Proceed"
+	goToCartNon.setAttribute("class","btn btn-info ml-3 my-2")
+	stepFour.appendChild(goToCartNon)
+	goToCartNon.addEventListener("click",checkComplete)
+	
 }

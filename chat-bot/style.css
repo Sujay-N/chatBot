@@ -4,6 +4,14 @@
   }
 
   .bot{
-      width : 150px;
-      height:auto
+      width : 70px;
+      height:auto;
+      position: absolute;
+      height: 1170px;
   }
+
+/* .chatInput{
+    position:relative;
+    height:300px;
+    
+} */
