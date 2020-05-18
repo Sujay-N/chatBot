@@ -12,7 +12,30 @@ var order = [];
 var orderObj ={}
 var cart = [];
 
+var chatObj = {
+	"Hi" : "Hi there!, Would you like to order a Pizza ?",
+	"How are you" : "I'm Good. Thanks for asking. Would you like to order a Pizza ?",
+	"Yes" : yes1,
+	"yes" : yes1,
+	"wassup" : "We have the best pizzas in town. Would you like to Order ?",
 
+}
+
+function chatWithBot() {
+	var data = document.getElementById("chatterBox").value
+	document.getElementById("chatterBox").value=""
+
+	document.getElementById("userQuestion").innerHTML += data+"<br>";
+
+	if(data in chatObj)
+	{
+		document.getElementById("botResponse").innerHTML = chatObj[data]+"<br>";
+	}
+	else
+	{
+		document.getElementById("botResponse").innerHTML = "I'm Sorry I dont understand! Would you like to order a Pizza ?"
+	}
+}
 // $(document).ready(function() {
 // 	$('.myChatBox').hide();
 // 	// $(".chatInput").hide();
@@ -46,8 +69,8 @@ function yes1() {
 	nonVeg.setAttribute('class', 'btn btn-outline-danger ml-5 my-2');
 	stepTwo.appendChild(nonVeg);
 
-	veg.addEventListener('click', vegCrust);
-	nonVeg.addEventListener('click', nonVegCrust);
+	veg.addEventListener('click', allVegPizzas);
+	nonVeg.addEventListener('click', allNonVegPizzas);
 }
 
 function mayBe1() {}
@@ -63,22 +86,22 @@ function vegCrust() {
 	var typeV = document.createElement('h5');
 	typeV.innerText = 'Select Type of Crust';
 	typeV.setAttribute('class', 'text-center my-2');
-	stepThree.appendChild(typeV);
+	stepFour.appendChild(typeV);
 
 	var wheat = document.createElement('button');
 	wheat.innerText = 'Wheat';
 	wheat.setAttribute('class', 'btn btn-outline-info ml-5 my-2');
-	stepThree.appendChild(wheat);
+	stepFour.appendChild(wheat);
 
 	var thin = document.createElement('button');
 	thin.innerText = 'Thin';
 	thin.setAttribute('class', 'btn btn-outline-info ml-2 my-2');
-	stepThree.appendChild(thin);
+	stepFour.appendChild(thin);
 
 	var cheese = document.createElement('button');
 	cheese.innerText = 'Cheese Burst';
 	cheese.setAttribute('class', 'btn btn-outline-info ml-2 my-2');
-	stepThree.appendChild(cheese);
+	stepFour.appendChild(cheese);
 
 	wheat.addEventListener('click', vegWheat);
 	thin.addEventListener('click', vegThin);
@@ -96,22 +119,22 @@ function nonVegCrust() {
 	var typeN = document.createElement('h5');
 	typeN.innerText = 'Select Type of Crust';
 	typeN.setAttribute('class', 'text-center my-2');
-	stepThree.appendChild(typeN);
+	stepFour.appendChild(typeN);
 
 	var wheat = document.createElement('button');
 	wheat.innerText = 'Wheat';
 	wheat.setAttribute('class', 'btn btn-outline-info ml-5 my-2');
-	stepThree.appendChild(wheat);
+	stepFour.appendChild(wheat);
 
 	var thin = document.createElement('button');
 	thin.innerText = 'Thin';
 	thin.setAttribute('class', 'btn btn-outline-info ml-2 my-2');
-	stepThree.appendChild(thin);
+	stepFour.appendChild(thin);
 
 	var cheese = document.createElement('button');
 	cheese.innerText = 'Cheese Burst';
 	cheese.setAttribute('class', 'btn btn-outline-info ml-2 my-2');
-	stepThree.appendChild(cheese);
+	stepFour.appendChild(cheese);
 
 	wheat.addEventListener('click', nonVegWheat);
 	thin.addEventListener('click', nonVegThin);
@@ -121,23 +144,23 @@ function nonVegCrust() {
 function vegWheat() {
 	order.push('Wheat Crust');
 	orderObj.crust = "Wheat Crust"
-	allVegPizzas();
+	extraToppings();
 }
 function vegThin() {
 	order.push('Thin Crust');
 	orderObj.crust ="Thin Crust"
-	allVegPizzas();
+	extraToppings();
 }
 function vegCB() {
 	order.push('Chese Burst');
 	orderObj.crust = "Cheese Burst"
-	allVegPizzas();
+	extraToppings();
 }
 
 function allVegPizzas() {
 	var selV = document.createElement('h5');
 	selV.innerText = 'Choose From Our In house Speacials';
-	stepFour.appendChild(selV);
+	stepThree.appendChild(selV);
 	selV.setAttribute('class', 'text-center my-4 ');
 
 	var veg1 = document.createElement('button');
@@ -191,13 +214,13 @@ function allVegPizzas() {
 	var customize = document.createElement("button")
 	customize.innerHTML= "Customize"
 	customize.setAttribute("class","btn btn-info ml-3 my-2")
-	stepFour.appendChild(customize)
-	customize.addEventListener("click",extraToppings)
+	stepThree.appendChild(customize)
+	customize.addEventListener("click",vegCrust)
 
 	var goToCart = document.createElement("button")
-	goToCart.innerHTML= "Customize"
+	goToCart.innerHTML= "Proceed"
 	goToCart.setAttribute("class","btn btn-info ml-3 my-2")
-	stepFour.appendChild(goToCart)
+	stepThree.appendChild(goToCart)
 	goToCart.addEventListener("click",checkComplete)
 
 
@@ -322,6 +345,9 @@ function checkComplete() {
 }
 
 function addAnotherPizza(){
+
+	viewSummary()
+	
 	stepTwo.innerHTML = "";
 	stepThree.innerHTML = "";
 	stepFour.innerHTML = "";
@@ -335,12 +361,14 @@ function placeOrder() {
 	var msgToGetDetails = document.createElement('h5');
 	msgToGetDetails.innerHTML = 'Your Cart is Ready! Please fill in your details to Proceed ';
     stepSix.appendChild(msgToGetDetails);
-    msgToGetDetails.setAttribute("class","my-2 ")
+	msgToGetDetails.setAttribute("class","my-2 ")
+	viewSummary()
 }
 
 function viewSummary(){
 
 	cart.push(orderObj)
+
 	console.log(cart)
 	 
 	var table = document.createElement("table")
@@ -357,15 +385,31 @@ function viewSummary(){
 	var tCol2 = document.createElement("td")
 	var tCol3 = document.createElement("td")
 
-	if(orderObj.tops != null)
+	// if(orderObj.tops != null)
 	var tCol4 = document.createElement("td")
 
 		cart.map((e) => {
+				
 				tCol1.textContent = e.kind
-				tCol2.innerHTML = e.crust
+
+					if(e.crust == null)
+					{
+						tCol2.innerHTML = "Wheat Crust"
+					}
+					else{
+						tCol2.innerHTML = e.crust
+					}
+				
+
 				tCol3.innerHTML = e.pizza
-				if(orderObj.tops != null)
+				if(e.tops == null)
+				{
+					tCol4.innerHTML = "Cheese"
+				}
+				else
+				{
 				tCol4.innerHTML = e.tops
+				}
 
 		})
 		console.log(tCol1,tCol2,tCol3,tCol4)
@@ -374,32 +418,34 @@ function viewSummary(){
 		tRow.appendChild(tCol3)
 		tRow.appendChild(tCol4)
 
+		table.setAttribute("class","border border-info rounded bg-light")
 		
 	
 	finalStep.appendChild(table)
+	orderObj={}
 }
 
 
 function nonVegWheat() {
 	order.push('Wheat Crust');
 	orderObj.crust = "Wheat Crust"
-	allNonVegPizzas();
+	extraToppings();
 }
 function nonVegThin() {
 	order.push('Thin Crust');
 	orderObj.crust = "Thin Crust"
-	allNonVegPizzas();
+	extraToppings();
 }
 function nonVegCB() {
 	order.push('Cheese Burst');
 	orderObj.crust = "Cheese Burst"
-	allNonVegPizzas();
+	extraToppings();
 }
 
 function allNonVegPizzas() {
 	var selN = document.createElement('h5');
 	selN.innerText = 'Choose From Our In house Speacials';
-	stepFour.appendChild(selN);
+	stepThree.appendChild(selN);
 	selN.setAttribute('class', 'text-center my-2');
 
 	var nonVeg1 = document.createElement('button');
@@ -453,13 +499,19 @@ function allNonVegPizzas() {
 	var customizeNon = document.createElement("button")
 	customizeNon.innerHTML= "Customize"
 	customizeNon.setAttribute("class","btn btn-info ml-3 my-2")
-	stepFour.appendChild(customizeNon)
-	customizeNon.addEventListener("click",extraToppings)
+	stepThree.appendChild(customizeNon)
+	customizeNon.addEventListener("click",nonVegCrust)
 
 	var goToCartNon = document.createElement("button")
 	goToCartNon.innerHTML= "Proceed"
 	goToCartNon.setAttribute("class","btn btn-info ml-3 my-2")
-	stepFour.appendChild(goToCartNon)
+	stepThree.appendChild(goToCartNon)
 	goToCartNon.addEventListener("click",checkComplete)
 	
 }
+
+// function selectSize () {
+// 	var sm = document.createElement("button")
+// 	sm.innerHTML = "small"
+// 	sm.setAttribute("class","btn btn-sm btn-dark")
+// }
