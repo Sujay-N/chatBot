@@ -30,23 +30,38 @@ var cart = [];
 var chatObj = {
 	Hi: 'Hi there!, Would you like to order a Pizza ?',
 	'How are you': "I'm Good. Thanks for asking. Would you like to order a Pizza ?",
-	Yes: yes1,
-	yes: yes1,
-	wassup: 'We have the best pizzas in town. Would you like to Order ?'
+	Yes: function(){ return this.yes1},
+	yes: this.yes1,
+	wassup: 'We have the best pizzas in town. Would you like to Order ?',
+	thanks : "My pleasure!",
 };
-// var data = document.getElementById("chatterBox").value
+
 function chatWithBot() {
 	var data1 = document.getElementById('chatterBox').value;
 	document.getElementById('chatterBox').value = '';
 
 	if (nam == 1 && stay == 1 && contact == 1) {
-		if (data1 != null) placed();
+		if (data1 != null) 
+		{
+			lastStep.innerText = data1
+			placed();
+		}
+	
 	} else if (nam == 1 && stay == 1) {
-		if (data1 != null) contact = 1;
-		userMob();
+		if (data1 != null) 
+		{
+			contact = 1;
+			lastStep.innerText = data1
+			userMob();
+		}
+	
 	} else if (nam == 1) {
-		if (data1 != null) stay = 1;
+		if (data1 != null) 
+		{
+			stay = 1;
+		lastStep.innerText = data1
 		userAddress();
+		}
 	} else if (flag == 1 && eQt == 0 && nam == 0) {
 		if (data1 > 0 && data1 < 100 && data1 % 1 == 0) {
 			var quantMsg = document.createElement('p');
@@ -123,9 +138,35 @@ function yes1() {
 	nonVeg.addEventListener('click', allNonVegPizzas);
 }
 
-function mayBe1() {}
+function mayBe1() {
 
-function who() {}
+	var maybe = document.createElement("h5")
+	maybe.setAttribute("class","text-center my-2 border rounded border-rounded border-info bg-light")
+	maybe.textContent = "We have the best pizzas in town. Try them now!!"
+	stepTwo.appendChild(maybe)
+
+	var maybeY = document.createElement("button")
+	maybeY.setAttribute("class","btn btn-sm btn-info offset-5")
+	maybeY.innerHTML = "Lets try"
+	stepTwo.appendChild(maybeY)
+
+	maybeY.addEventListener("click", yes1)
+}
+
+function who() {
+	var whoIsBot = document.createElement("h5")
+	whoIsBot.setAttribute("class","text-center my-2 border rounded border-rounded border-info bg-light")
+	whoIsBot.textContent = "Hi my name is Tarani!, I can help you order a Pizza"
+	stepTwo.appendChild(whoIsBot)
+
+	var whoY = document.createElement("button")
+	whoY.setAttribute("class","btn btn-sm btn-info offset-5")
+	whoY.innerHTML = "Lets try"
+	stepTwo.appendChild(whoY)
+	whoY.addEventListener("click", yes1)
+
+
+}
 
 function crust() {
 	var typeN = document.createElement('h5');
@@ -209,16 +250,12 @@ function allVegPizzas() {
 
 		howManyPizzas();
 
-		// chatWithBotQty()
-
-		// pizzaSelected();
 		order.push(veg1.innerHTML);
 		orderObj.pizza = veg1.innerHTML;
 		console.log(order);
 	});
 
 	veg2.addEventListener('click', function() {
-		// pizzaSelected();
 		flag = 1;
 
 		$(veg1).hide();
@@ -232,7 +269,7 @@ function allVegPizzas() {
 	});
 
 	veg3.addEventListener('click', function() {
-		// pizzaSelected();
+		
 		flag = 1;
 
 		$(veg2).hide();
@@ -247,7 +284,7 @@ function allVegPizzas() {
 	});
 
 	veg4.addEventListener('click', function() {
-		// pizzaSelected();
+
 		flag = 1;
 
 		$(veg2).hide();
@@ -266,10 +303,16 @@ function howManyPizzas() {
 	msgQty.innerHTML = 'Please Key in the Quantity!';
 	msgQty.setAttribute('class', 'text-success text-center my-2 ');
 
+	var msgSize = document.createElement('h6');
+	msgSize.innerHTML = 'Please Note : We serve only 10 inch pizzas , Serves 1 Adult';
+	msgSize.setAttribute('class', 'text-primary  my-2 ');
+
 	if (eQt == 1) {
 		edit.appendChild(msgQty);
+		edit.appendChild(msgSize)
 	} else {
 		stepThree.appendChild(msgQty);
+		stepThree.appendChild(msgSize)
 	}
 }
 
@@ -625,7 +668,7 @@ function editOrder() {
 function editFunctionality() {
 	var editQty = document.createElement('button');
 	editQty.innerHTML = 'Edit Quantity';
-	editQty.setAttribute('class', 'btn btn-sm btn-secondary mt-2 ml-4');
+	editQty.setAttribute('class', 'btn btn-sm btn-secondary mt-2 offset-5');
 	edit.appendChild(editQty);
 
 	editQty.addEventListener('click', function() {
@@ -634,20 +677,20 @@ function editFunctionality() {
 		howManyPizzas();
 	});
 
-	var editPizza = document.createElement('button');
-	editPizza.innerHTML = 'Edit Pizza';
-	editPizza.setAttribute('class', 'btn btn-sm btn-secondary mt-2 ml-3');
-	edit.appendChild(editPizza);
+	// var editPizza = document.createElement('button');
+	// editPizza.innerHTML = 'Edit Pizza';
+	// editPizza.setAttribute('class', 'btn btn-sm btn-secondary mt-2 ml-3');
+	// edit.appendChild(editPizza);
 
-	var editTop = document.createElement('button');
-	editTop.innerHTML = 'Edit Toppings';
-	editTop.setAttribute('class', 'btn btn-sm btn-secondary mt-2 ml-3');
-	edit.appendChild(editTop);
+	// var editTop = document.createElement('button');
+	// editTop.innerHTML = 'Edit Toppings';
+	// editTop.setAttribute('class', 'btn btn-sm btn-secondary mt-2 ml-3');
+	// edit.appendChild(editTop);
 
-	var editCrust = document.createElement('button');
-	editCrust.innerHTML = 'Edit Crust';
-	editCrust.setAttribute('class', 'btn btn-sm btn-secondary mt-2 offset-5');
-	edit.appendChild(editCrust);
+	// var editCrust = document.createElement('button');
+	// editCrust.innerHTML = 'Edit Crust';
+	// editCrust.setAttribute('class', 'btn btn-sm btn-secondary mt-2 offset-5');
+	// edit.appendChild(editCrust);
 }
 
 function setOrder() {
