@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order In</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="https://kit.fontawesome.com/b8d475717b.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+    <div class="row m-3 overflow">
+      <div class="col-8">
+
+      </div>
+
+      <div class="col-4 robot ">
+        <img src="https://cdn.svgporn.com/logos/geekbot.svg" id="botImg" class="offset-9 bot" title="Hi! I'm Tarani! Click ME to order your Pizza">
+
+        <div class="toggleShowHide">
+
+
+          <div class=" shadow border rounded myChatBox scrollable">
+            <div class="text-center border rounded border-info bg-light mt-3">
+              <h3> Hi!</h3>
+              <h4>Welcome to The Pizzeria</h4>
+              <h5>Would you like to Order a Pizza ?</h5>
+            </div>
+
+            <br />
+            <button class="btn btn-outline-info m-2 ml-5" onclick="yes1()"> Yes</button>
+            <button class="btn btn-outline-info m-2" onclick="mayBe1()"> Maybe </button>
+            <button class="btn btn-outline-info m-2" onclick="who()"> Who is this ?</button>
+            <div id="currOrder"> </div>
+            <div id="step2"> </div>
+
+
+            <div id="step3"> </div>
+
+
+            <div id="step4"> </div>
+
+
+            <div id="step5"> </div>
+
+
+            <div id="step6"> </div>
+
+
+            <div id="step7"> </div>
+
+
+            <div id="finalStep"> </div>
+
+            <div id="edit"> </div>
+            <div id="lastStep"> </div>
+
+            <div id="userQuestion">
+
+            </div>
+            <div id="botResponse">
+
+            </div>
+
+          </div>
+
+          <div class="chatInput">
+            <div class="input-group ">
+              <input type="text" id="chatterBox" class="form-control" aria-label="Text input with button" />
+              <div class="input-group-append">
+                <button class="btn btn-sm btn-outline-secondary" onclick="chatWithBot()"> send </i> </button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="index.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
